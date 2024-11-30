@@ -1,0 +1,34 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "containerDefinitions": [
+    {
+      "name": "client",
+      "image": "finnkiesinger/multi-client",
+      "hostname": "client",
+      "essential": false
+    },
+    {
+      "name": "server",
+      "image": "finnkiesinger/multi-server",
+      "hostname": "api",
+      "essential": false
+    },
+    {
+      "name": "woker",
+      "image": "finnkiesinger/multi-worker",
+      "essential": false
+    },
+    {
+      "name": "nginx",
+      "image": "finnkiesinger/multi-nginx",
+      "essential": true,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": ["client", "server"]
+    }
+  ]
+}
